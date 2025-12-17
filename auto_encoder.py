@@ -31,17 +31,17 @@ class AutoEncoder:
         """
         Encodes an input vector x.
         """
-        x1 = utils.activation(x * self.W1)
-        x_hat = utils.activation(x1 * self.W2)
-        return x_hat
+        x1 = utils.activation(x @ self.W1)
+        x_hat = utils.activation(x1 @ self.W2)
+        return np.asarray(x_hat)
 
     def decode(self, x: np.ndarray) -> np.ndarray:
         """
         Decodes an encoded vector x.
         """
-        x2 = utils.activation(x * self.W3)
-        y = utils.activation(x2 * self.W4)
-        return y
+        x2 = utils.activation(x @ self.W3)
+        y = utils.activation(x2 @ self.W4)
+        return np.asarray(y)
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         """
