@@ -37,8 +37,3 @@ def derivative(x: int | float | np.ndarray) -> int | float | np.ndarray:
     derivative(𝑥) = 𝑥(1 − 𝑥)
     """
     return x * (1 - x)
-
-def MSE(x: np.ndarray, y: np.ndarray):
-    """MSE(𝑥, 𝑦) = 1/𝑛 Σ (𝑥 − 𝑦)^2"""
-    n = x.size
-    return 1/n * np.sum((x - y) ** 2)
