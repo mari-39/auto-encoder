@@ -1,6 +1,7 @@
 from typing import List
 import numpy as np
 from tqdm import tqdm
+import utils
 
 
 class AutoEncoder:
@@ -24,23 +25,22 @@ class AutoEncoder:
 
     def loss(self, x: np.ndarray, y: np.ndarray) -> float: ...
 
-    def sigmoid_activation(self, x: np.ndarray):
-        return 1/(1 + np.exp(-x))
+    
 
     def encode(self, x: np.ndarray) -> np.ndarray:
         """
         Encodes an input vector x.
         """
-        x1 = self.sigmoid_activation(x * self.W1)
-        x_hat = self.sigmoid_activation(x1 * self.W2)
+        x1 = utils.activation(x * self.W1)
+        x_hat = utils.activation(x1 * self.W2)
         return x_hat
 
     def decode(self, x: np.ndarray) -> np.ndarray:
         """
         Decodes an encoded vector x.
         """
-        x2 = self.sigmoid_activation(x * self.W3)
-        y = self.sigmoid_activation(x2 * self.W4)
+        x2 = utils.activation(x * self.W3)
+        y = utils.activation(x2 * self.W4)
         return y
 
     def forward(self, x: np.ndarray) -> np.ndarray:

@@ -28,11 +28,12 @@ def activation(x: int | float | np.ndarray) -> int | float | np.ndarray:
     """
     The sigmoid activation function.
     """
-    ...
+    return 1 / (1 + np.exp(-x))
 
 
 def derivative(x: int | float | np.ndarray) -> int | float | np.ndarray:
     """
     The derivative of the sigmoid activation function.
+    derivative(𝑥) = 𝑥(1 − 𝑥)
     """
-    ...
+    return x * (1 - x)
