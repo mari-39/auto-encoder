@@ -16,29 +16,22 @@ model = AE(784, 500, 0.005) # Note: mu = 0.5 was WAY too high, init settings: 50
 # RUN TRAIN
 model.train(train_data)
 
+# %%
+# RUN TEST
+test_pred = model.forward(test_data)
+print(f"Loss for one epoch of test data prediction: ", model.loss(test_pred, test_data))
+
 #%%
 # VISUALIZE
-# 1. Pick a single test image (Shape is likely (784,))
-example_img = test_data[1]
-
-# 2. Add a batch dimension to make it (1, 784) for the model
+example_img = test_data[0]
 input_batch = example_img.reshape(1, -1)
 
-# 3. Get the reconstruction (Shape will be (1, 784))
-reconstructed_batch = model.forward(input_batch)
+batch_pred = model.forward(input_batch)
+reconstruction_vector = batch_pred.flatten()
 
-# 4. CRITICAL STEP: Convert back to 1D (784,) for the assignment's function
-# .flatten() or [0] removes the batch dimension so the square root math works
-reconstruction_vector = reconstructed_batch.flatten()
-
-# 5. Render
-print("Original:")
+print("Original image:")
 utils.plot_image(example_img)
 
-print("Reconstructed:")
+print("Reconstructed image:")
 utils.plot_image(reconstruction_vector)
-
-
-
-
 # %%
